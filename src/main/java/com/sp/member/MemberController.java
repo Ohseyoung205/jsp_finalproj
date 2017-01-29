@@ -165,6 +165,11 @@ public class MemberController {
 			return "redirect:/";
 		}
 		
+		  ShaPasswordEncoder passwordEncoder=new ShaPasswordEncoder(256);
+		  userPW=passwordEncoder.encodePassword(userPW, null);
+	   
+	      
+	      
 		if(! dto.getUserPW().equals(userPW)) {
 			if(mode.equals("update")) {
 				model.addAttribute("mode", "update");
@@ -172,6 +177,8 @@ public class MemberController {
 			} else {
 				model.addAttribute("mode", "dropout");
 			}
+			
+			
 			model.addAttribute("message", "패스워드가 일치하지 않습니다.");
 			return ".member.pwd";
 		}
